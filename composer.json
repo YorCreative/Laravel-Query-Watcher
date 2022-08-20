@@ -1,0 +1,49 @@
+{
+    "name": "yorcreative/laravel-query-watcher",
+    "description": "A Laravel package that provides configurable application query capturing & monitoring.",
+    "type": "library",
+    "keywords": [
+        "laravel",
+        "framework",
+        "queries",
+        "sql monitoring",
+        "capture queries",
+        "query capture",
+        "query monitoring",
+        "query watcher",
+        "slow query monitoring"
+    ],
+    "minimum-stability": "dev",
+    "require": {
+        "php": "^8.0",
+        "ext-pdo_sqlite": "*",
+        "illuminate/contracts": "^8.0|^9.0",
+        "guzzlehttp/guzzle": "7.4.x-dev"
+    },
+    "require-dev": {
+        "laravel/pint": "^1.0",
+        "orchestra/testbench": "^7.0",
+        "phpunit/phpunit": "^9.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "YorCreative\\QueryWatcher\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "YorCreative\\QueryWatcher\\Tests\\": "tests"
+        }
+    },
+    "scripts": {
+        "test": "vendor/bin/phpunit",
+        "lint": "vendor/bin/pint"
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "YorCreative\\QueryWatcher\\QueryWatcherServiceProvider"
+            ]
+        }
+    }
+}
