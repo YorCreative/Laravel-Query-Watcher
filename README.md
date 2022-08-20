@@ -13,7 +13,6 @@
 <a href="https://github.com/YorCreative/Laravel-Query-Watcher/stargazers"><img alt="GitHub stars" src="https://img.shields.io/github/stars/YorCreative/Laravel-Query-Watcher"></a>
 <a href="https://github.com/YorCreative/Laravel-Query-Watcher/issues"><img alt="GitHub issues" src="https://img.shields.io/github/issues/YorCreative/Laravel-Query-Watcher"></a>
 <a href="https://github.com/YorCreative/Laravel-Query-Watcher/network"><img alt="GitHub forks" src="https://img.shields.io/github/forks/YorCreative/Laravel-Query-Watcher"></a>
-<img alt="Packagist Downloads" src="https://img.shields.io/packagist/dt/YorCreative/Laravel-Query-Watcher?color=green">
 <a href="https://github.com/YorCreative/Laravel-Query-Watcher/actions/workflows/phpunit.yml"><img alt="PHPUnit" src="https://github.com/YorCreative/Laravel-Query-Watcher/actions/workflows/phpunit.yml/badge.svg"></a>
 </div>
 
