@@ -18,7 +18,7 @@
         "php": "^8.0",
         "ext-pdo_sqlite": "*",
         "illuminate/contracts": "^8.0|^9.0",
-        "guzzlehttp/guzzle": "7.4.x-dev"
+        "guzzlehttp/guzzle": "^7.4.5"
     },
     "require-dev": {
         "laravel/pint": "^1.0",
