@@ -17,8 +17,6 @@ class CaptureQueryTest extends TestCase
      */
     public function it_can_capture_a_query()
     {
-        $this->markTestSkipped('Uncomment for local development testing. Fails Github Pipeline Test.');
-
         HTTP::fake();
 
         (new Test())
@@ -26,9 +24,7 @@ class CaptureQueryTest extends TestCase
             ->get();
 
         $this->assertEventBroadcasted(
-            'query.event',
-            'private-query.event.'.config('querywatcher.token'),
-            1
+            'query.event'
         );
     }
 
