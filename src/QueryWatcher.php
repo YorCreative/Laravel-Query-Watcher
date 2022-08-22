@@ -2,6 +2,7 @@
 
 namespace YorCreative\QueryWatcher;
 
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\DB;
 use YorCreative\QueryWatcher\Events\QueryEvent;
 
@@ -12,19 +13,20 @@ class QueryWatcher
      */
     public static function listen(): void
     {
-        if (config('querywatcher.enabled')) {
-            DB::enableQueryLog();
-
+        ! self::isQueryWatcherEnabled() ?:
             DB::listen(function ($query) {
                 $time_exceeds_ms_enabled = self::timeExceedsMsEnabled();
 
-                if (isset($time_exceeds_ms_enabled)
-                    && self::getTimeExceedsMs() < $query->time
-                    || ! isset($time_exceeds_ms_enabled)) {
+                if ($time_exceeds_ms_enabled && self::getTimeExceedsMs() < $query->time
+                    || ! $time_exceeds_ms_enabled) {
                     event(new QueryEvent($query));
                 }
             });
-        }
+    }
+
+    public static function isQueryWatcherEnabled()
+    {
+        return Config::get('querywatcher.enabled') ?? false;
     }
 
     /**
