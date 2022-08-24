@@ -50,6 +50,19 @@ Adjust the configuration file to suite your application.
             'enabled' => true, // Do you want to capture everything or only slow queries?
             'threshold' => 500, // The number of milliseconds it took to execute the query.
         ],
+        'context' => [
+            'auth_user' => [
+                'enabled' => true, // Do you want to know context of the authenticated user when query is captured?
+                'ttl' => 300, // How long do you want the session_id/authenticated user cached for? 
+                              // without this cache, your application will infinite loop because it will capture
+                              // the user query and loop.
+                              // See closed Issue #1 for context.
+            ],
+            'trigger' => [
+                'enabled' => true, // Do you want to know what triggered the query?
+                                   // i.e Console command or Request
+            ],
+        ],
     ],
     'listener' => [ // Channel notifications are queued
         'connection' => 'sync', // Define what connection to use.
