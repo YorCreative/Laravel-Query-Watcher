@@ -8,6 +8,15 @@ return [
             'enabled' => false,
             'threshold' => 2,
         ],
+        'context' => [
+            'auth_user' => [
+                'enabled' => true,
+                'ttl' => 300,
+            ],
+            'trigger' => [
+                'enabled' => true,
+            ],
+        ],
     ],
     'listener' => [
         'connection' => 'sync',

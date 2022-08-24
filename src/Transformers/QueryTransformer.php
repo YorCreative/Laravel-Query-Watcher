@@ -3,6 +3,7 @@
 namespace YorCreative\QueryWatcher\Transformers;
 
 use Illuminate\Database\Events\QueryExecuted;
+use Illuminate\Support\Facades\Config;
 
 class QueryTransformer
 {
@@ -14,13 +15,25 @@ class QueryTransformer
      */
     public static function transform(QueryExecuted $query): array
     {
-        return [
+        $context = [
             'sql' => $query->sql,
             'bindings' => $query->bindings,
             'time' => $query->time,
             'connection' => $query->connectionName,
-            'trigger' => TriggerTransformer::transform(),
-            'auth' => AuthTransformer::transform(),
         ];
+
+        if (Config::get('querywatcher.scope.context.trigger.enabled')) {
+            $context = array_merge($context, [
+                'trigger' => TriggerTransformer::transform(),
+            ]);
+        }
+
+        if (Config::get('querywatcher.scope.context.auth_user.enabled')) {
+            $context = array_merge($context, [
+                'auth' => AuthTransformer::transform(),
+            ]);
+        }
+
+        return $context;
     }
 }

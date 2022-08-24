@@ -16,6 +16,8 @@ class AuthTransformerTest extends TestCase
 
         HTTP::fake();
         Event::fake();
+
+        self::trackQueries();
     }
 
     /**
@@ -36,6 +38,8 @@ class AuthTransformerTest extends TestCase
             ],
             AuthTransformer::transform()
         );
+
+        $this->assertQueryCountMatches(1);
     }
 
     /**
@@ -53,5 +57,7 @@ class AuthTransformerTest extends TestCase
             ],
             AuthTransformer::transform()
         );
+
+        $this->assertNoQueriesExecuted();
     }
 }
