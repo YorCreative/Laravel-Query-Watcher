@@ -17,6 +17,8 @@ class QueryTransformerTest extends TestCase
 
         HTTP::fake();
         Event::fake();
+
+        self::trackQueries();
     }
 
     /**
@@ -55,5 +57,7 @@ class QueryTransformerTest extends TestCase
             ],
             QueryTransformer::transform($queryEvent)
         );
+
+        $this->assertNoQueriesExecuted();
     }
 }

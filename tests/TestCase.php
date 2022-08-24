@@ -7,15 +7,17 @@ use Illuminate\Foundation\Application;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\File;
-use Illuminate\Support\Str;
 use YorCreative\QueryWatcher\Models\QueryModel;
-use YorCreative\QueryWatcher\Tests\Utility\TestBroadcast;
 use YorCreative\QueryWatcher\Tests\Utility\TestBroadcasterServiceProvider;
 use YorCreative\QueryWatcher\Tests\Utility\TestQueryWatcherServiceProvider;
+use YorCreative\QueryWatcher\Tests\Utility\Traits\BroadcastAssertions;
+use YorCreative\QueryWatcher\Tests\Utility\Traits\QueryAssertions;
 use YorCreative\QueryWatcher\Transformers\QueryTransformer;
 
 class TestCase extends \Orchestra\Testbench\TestCase
 {
+    use QueryAssertions, BroadcastAssertions;
+
     public QueryExecuted $queryEvent;
 
     public string $sql;
@@ -46,43 +48,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
         $this->queryEvent = new QueryExecuted($this->sql, $this->bindings, $this->time, $connection);
 
         $this->queryModel = new QueryModel(QueryTransformer::transform($this->queryEvent));
-    }
-
-    /**
-     * @param $event
-     * @param  null  $channels
-     * @param  null  $count
-     */
-    public function assertEventBroadcasted($event, $channels = null, $count = null)
-    {
-        $broadcaster = resolve(TestBroadcast::class);
-
-        $message = "Failed asserting that event '$event' was broadcasted";
-
-        if (is_int($channels)) {
-            $count = $channels;
-            $channels = null;
-        }
-
-        if ($channels != null) {
-            $message .= ' on channel ';
-            if (is_array($channels)) {
-                $message .= "s '".implode(', ', $channels)."'";
-            } else {
-                $message .= "'".$channels."'";
-            }
-        }
-
-        if ($count != null) {
-            $message .= ' '.$count.' times';
-        }
-
-        $broadcasts = $broadcaster->getBroadcasts();
-        $broadcastCount = count($broadcasts);
-        $evtStr = Str::plural('event', $broadcastCount);
-        $message .= "\n$broadcastCount $evtStr was broadcasted: ".json_encode($broadcasts);
-
-        $this->assertTrue($broadcaster->contains($event, $channels, $count), $message);
     }
 
     /**
