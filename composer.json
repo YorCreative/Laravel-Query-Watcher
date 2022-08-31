@@ -2,6 +2,7 @@
     "name": "yorcreative/laravel-query-watcher",
     "description": "A Laravel package that provides configurable application query capturing & monitoring.",
     "type": "library",
+    "license": "MIT",
     "keywords": [
         "laravel",
         "framework",
