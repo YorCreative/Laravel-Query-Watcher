@@ -17,6 +17,12 @@ return [
                 'enabled' => true,
             ],
         ],
+        'ignorable_tables' => [
+            'jobs'
+        ],
+        'ignorable_statements' => [
+            'create'
+        ]
     ],
     'listener' => [
         'connection' => 'sync',

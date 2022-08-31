@@ -4,6 +4,7 @@ namespace YorCreative\QueryWatcher\Tests\Feature;
 
 use Illuminate\Foundation\Testing\DatabaseTransactions;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\Facades\Http;
 use YorCreative\QueryWatcher\Events\QueryEvent;
@@ -22,6 +23,75 @@ class CaptureQueryTest extends TestCase
 
         self::trackQueries();
     }
+
+    /**
+     * @test
+     * @group Feature
+     */
+    public function it_can_ignore_a_query_by_ignorable_table_scope()
+    {
+        Event::fake();
+
+        Config::set('querywatcher.scope.ignorable_tables', [
+            'tests'
+        ]);
+
+        (new Test())
+            ->newQuery()
+            ->create([
+                'field' => 'testing'
+            ]);
+
+        (new Test())
+            ->newQuery()
+            ->get();
+
+        (new Test())
+            ->newQuery()
+            ->where('field', 'testing')
+            ->update([
+                'field' => 'okay'
+            ]);
+
+
+        Event::assertNotDispatched(QueryEvent::class);
+
+        $this->assertQueryCountMatches(3);
+    }
+
+    /**
+     * @test
+     * @group Feature
+     */
+    public function it_can_ignore_a_query_by_ignorable_statement_scope()
+    {
+        HTTP::fake();
+
+        Config::set('querywatcher.scope.ignorable_statements', [
+            'delete'
+        ]);
+
+        (new Test())
+            ->newQuery()
+            ->create([
+                'field' => 'testing'
+            ]);
+
+        $tests = (new Test())
+            ->newQuery()
+            ->get();
+
+        $tests->first()->delete();
+
+        $this->assertEventBroadcasted(
+            'query.event',
+            null,
+            2
+        );
+
+        $this->assertQueryCountMatches(3);
+    }
+
 
     /**
      * @test

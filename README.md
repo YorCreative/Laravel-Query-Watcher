@@ -63,6 +63,14 @@ Adjust the configuration file to suite your application.
                                    // i.e Console command or Request
             ],
         ],
+        'ignorable_tables' => [
+            'jobs' // Do you want to capture queries on specific tables?
+                   // If you are utilizing the database queue driver, you need to
+                   // ignore the jobs table or you'll get infinite capture loops.
+        ],
+        'ignorable_statements' => [
+            'create' // Do you want to ignore specific SQL statements?
+        ]
     ],
     'listener' => [ // Channel notifications are queued
         'connection' => 'sync', // Define what connection to use.
