@@ -19,9 +19,8 @@ class QueryWatcher
                 $time_exceeds_ms_enabled = self::timeExceedsMsEnabled();
 
                 if ($time_exceeds_ms_enabled && self::getTimeExceedsMs() < $query->time
-                    || !$time_exceeds_ms_enabled
-                    && !self::ignorable($query)) {
-
+                    || ! $time_exceeds_ms_enabled
+                    && ! self::ignorable($query)) {
                     // only capture queries if:
                     //     - time_exceeds_ms is not enabled
                     //     - time_exceeds_ms is enabled and query time exceeds the threshold.
@@ -55,14 +54,14 @@ class QueryWatcher
     }
 
     /**
-     * @param QueryExecuted $queryExecuted
+     * @param  QueryExecuted  $queryExecuted
      * @return bool
      */
     public static function ignorable(QueryExecuted $queryExecuted): bool
     {
         // check if query is on table that is ignorable
         foreach (Config::get('querywatcher.scope.ignorable_tables') as $table) {
-            if(preg_match('~(from "'.$table .'"|update "'.$table.'"|into "'.$table.'")~i',$queryExecuted->sql)) {
+            if (preg_match('~(from "'.$table.'"|update "'.$table.'"|into "'.$table.'")~i', $queryExecuted->sql)) {
                 return true;
             }
         }
