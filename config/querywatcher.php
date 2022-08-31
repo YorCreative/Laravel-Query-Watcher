@@ -18,11 +18,11 @@ return [
             ],
         ],
         'ignorable_tables' => [
-            'jobs'
+            'jobs',
         ],
         'ignorable_statements' => [
-            'create'
-        ]
+            'create',
+        ],
     ],
     'listener' => [
         'connection' => 'sync',

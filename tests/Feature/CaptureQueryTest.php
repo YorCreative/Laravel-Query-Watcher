@@ -33,13 +33,13 @@ class CaptureQueryTest extends TestCase
         Event::fake();
 
         Config::set('querywatcher.scope.ignorable_tables', [
-            'tests'
+            'tests',
         ]);
 
         (new Test())
             ->newQuery()
             ->create([
-                'field' => 'testing'
+                'field' => 'testing',
             ]);
 
         (new Test())
@@ -50,9 +50,8 @@ class CaptureQueryTest extends TestCase
             ->newQuery()
             ->where('field', 'testing')
             ->update([
-                'field' => 'okay'
+                'field' => 'okay',
             ]);
-
 
         Event::assertNotDispatched(QueryEvent::class);
 
@@ -68,13 +67,13 @@ class CaptureQueryTest extends TestCase
         HTTP::fake();
 
         Config::set('querywatcher.scope.ignorable_statements', [
-            'delete'
+            'delete',
         ]);
 
         (new Test())
             ->newQuery()
             ->create([
-                'field' => 'testing'
+                'field' => 'testing',
             ]);
 
         $tests = (new Test())
@@ -91,7 +90,6 @@ class CaptureQueryTest extends TestCase
 
         $this->assertQueryCountMatches(3);
     }
-
 
     /**
      * @test
