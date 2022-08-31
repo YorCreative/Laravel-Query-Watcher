@@ -26,6 +26,7 @@ class QueryWatcher
                     //     - time_exceeds_ms is not enabled
                     //     - time_exceeds_ms is enabled and query time exceeds the threshold.
                     //     - query isn't on table that is ignorable.
+                    //     - query isn't a sql statement that is ignorable
 
                     event(new QueryEvent($query));
                 }
