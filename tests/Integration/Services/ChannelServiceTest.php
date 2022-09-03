@@ -5,6 +5,7 @@ namespace YorCreative\QueryWatcher\Tests\Integration\Services;
 use ReflectionClass;
 use YorCreative\QueryWatcher\Services\ChannelService;
 use YorCreative\QueryWatcher\Strategies\NotificationStrategy\Channels\Discord;
+use YorCreative\QueryWatcher\Strategies\NotificationStrategy\Channels\Slack;
 use YorCreative\QueryWatcher\Tests\TestCase;
 
 class ChannelServiceTest extends TestCase
@@ -22,11 +23,12 @@ class ChannelServiceTest extends TestCase
 
         $channels = $protectedMethod->invokeArgs(new ChannelService(), []);
 
-        $this->assertCount(1, $channels);
+        $this->assertCount(2, $channels);
 
         $channels->each(function ($channel) {
             $this->assertTrue(in_array($channel, [
                 new Discord(),
+                new Slack(),
             ]));
         });
     }

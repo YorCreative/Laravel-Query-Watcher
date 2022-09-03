@@ -82,6 +82,10 @@ Adjust the configuration file to suite your application.
             'enabled' => false, // Do you want discord webhook notifications?
             'hook' => env('DISCORD_HOOK', 'please_fill_me_in'), 
         ],
+        'slack' => [ 
+            'enabled' => false, // Do you want Slack webhook notifications?
+            'hook' => env('SLACK_HOOK', 'please_fill_me_in'), 
+        ],
     ]
 ]
 ```
@@ -112,6 +116,17 @@ applications [broadcast configuration](https://laravel.com/docs/9.x/broadcasting
     }
 ```
 
+### Slack Notification Channel
+
+To utilize Slack Notifications, you will need to [create a webhook](https://api.slack.com/messaging/webhooks#create_a_webhook) for one of your Slack Channels. Once you have your
+webhook url, add the following variable to your .env file.
+
+```dotenv
+SLACK_HOOK=<hook>
+```
+
+Once you have done this, you can enable Slack Notifications in the configuration file.
+
 ### Discord Notification Channel
 
 Get a webhook URL from discord in the channel you want to receive your notifications in by
@@ -124,20 +139,10 @@ DISCORD_HOOK=<hook>
 
 Once you have done this, you can enable Discord Notifications in the configuration file.
 
-### Screenshots
+### Wiki Documentation
 
-<div align="center">
-  <a href="https://github.com/YorCreative">
-    <img src="content/discord_notification_console.png" alt="Logo" width="223" height="300">
-  </a>
-</div>
-<br>
-<div align="center">
-  <a href="https://github.com/YorCreative">
-    <img src="content/discord_notification_request.png" alt="Logo" width="286" height="343">
-  </a>
-</div>
-
+- [Notification Channels Wiki](https://github.com/YorCreative/Laravel-Query-Watcher/wiki/Notification-Channels)
+- [Screenshots](https://github.com/YorCreative/Laravel-Query-Watcher/wiki/Screenshots)
 ## Testing
 
 ```bash
