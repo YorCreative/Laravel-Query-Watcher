@@ -34,5 +34,9 @@ return [
             'enabled' => false,
             'hook' => env('DISCORD_HOOK', 'placeholder'),
         ],
+        'slack' => [
+            'enabled' => false,
+            'hook' => env('SLACK_HOOK', 'placeholder')
+        ]
     ],
 ];

@@ -5,6 +5,7 @@ namespace YorCreative\QueryWatcher\Services;
 use Illuminate\Support\Collection;
 use YorCreative\QueryWatcher\Models\QueryModel;
 use YorCreative\QueryWatcher\Strategies\NotificationStrategy\Channels\Discord;
+use YorCreative\QueryWatcher\Strategies\NotificationStrategy\Channels\Slack;
 use YorCreative\QueryWatcher\Strategies\NotificationStrategy\NotificationStrategy;
 
 class ChannelService
@@ -32,6 +33,7 @@ class ChannelService
     {
         return new Collection([
             new Discord(),
+            new Slack()
         ]);
     }
 }
