@@ -36,7 +36,7 @@ return [
         ],
         'slack' => [
             'enabled' => false,
-            'hook' => env('SLACK_HOOK', 'placeholder')
-        ]
+            'hook' => env('SLACK_HOOK', 'placeholder'),
+        ],
     ],
 ];

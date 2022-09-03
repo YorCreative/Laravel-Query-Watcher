@@ -28,7 +28,7 @@ class ChannelServiceTest extends TestCase
         $channels->each(function ($channel) {
             $this->assertTrue(in_array($channel, [
                 new Discord(),
-                new Slack()
+                new Slack(),
             ]));
         });
     }

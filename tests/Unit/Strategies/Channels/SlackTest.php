@@ -3,7 +3,6 @@
 namespace YorCreative\QueryWatcher\Tests\Unit\Strategies\Channels;
 
 use Illuminate\Support\Facades\Http;
-use YorCreative\QueryWatcher\Strategies\NotificationStrategy\Channels\Discord;
 use YorCreative\QueryWatcher\Strategies\NotificationStrategy\Channels\Slack;
 use YorCreative\QueryWatcher\Tests\TestCase;
 

@@ -33,7 +33,7 @@ class ChannelService
     {
         return new Collection([
             new Discord(),
-            new Slack()
+            new Slack(),
         ]);
     }
 }

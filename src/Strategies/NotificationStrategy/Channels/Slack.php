@@ -17,7 +17,7 @@ class Slack implements NotificationChannelInterface
     }
 
     /**
-     * @param QueryModel $model
+     * @param  QueryModel  $model
      */
     public function notify(QueryModel $model): void
     {
@@ -43,7 +43,7 @@ class Slack implements NotificationChannelInterface
      */
 
     /**
-     * @param QueryModel $model
+     * @param  QueryModel  $model
      * @return \array[][]
      */
     protected function buildCoreBaseEnrichment(QueryModel $model): array
@@ -51,7 +51,7 @@ class Slack implements NotificationChannelInterface
         return [
             'blocks' => [
                 [
-                    'type' => 'divider'
+                    'type' => 'divider',
                 ],
                 [
                     'type' => 'header',
@@ -92,7 +92,7 @@ class Slack implements NotificationChannelInterface
                     'type' => 'section',
                     'text' => [
                         'type' => 'plain_text',
-                        'text' => json_encode($model->time) . ' ms',
+                        'text' => json_encode($model->time).' ms',
                     ],
                 ],
                 [
@@ -114,7 +114,7 @@ class Slack implements NotificationChannelInterface
     }
 
     /**
-     * @param array $payload
+     * @param  array  $payload
      * @return array
      */
     protected function buildConsoleEnrichment(array $payload): array
@@ -140,8 +140,8 @@ class Slack implements NotificationChannelInterface
     }
 
     /**
-     * @param array $payload
-     * @param QueryModel $model
+     * @param  array  $payload
+     * @param  QueryModel  $model
      * @return array
      */
     protected function buildRequestEnrichment(array $payload, QueryModel $model): array
@@ -159,7 +159,7 @@ class Slack implements NotificationChannelInterface
                 'elements' => [
                     [
                         'type' => 'mrkdwn',
-                        'text' => '*Trigger:* ' . $model->trigger['action'],
+                        'text' => '*Trigger:* '.$model->trigger['action'],
                     ],
                 ],
             ],
@@ -168,7 +168,7 @@ class Slack implements NotificationChannelInterface
                 'elements' => [
                     [
                         'type' => 'mrkdwn',
-                        'text' => '*Method:* ' . $model->trigger['context']['method'],
+                        'text' => '*Method:* '.$model->trigger['context']['method'],
                     ],
                 ],
             ],
@@ -177,7 +177,7 @@ class Slack implements NotificationChannelInterface
                 'elements' => [
                     [
                         'type' => 'mrkdwn',
-                        'text' => '*URL:* ' . $model->trigger['context']['url'],
+                        'text' => '*URL:* '.$model->trigger['context']['url'],
                     ],
                 ],
             ],
