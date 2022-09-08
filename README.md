@@ -43,47 +43,71 @@ Adjust the configuration file to suite your application.
 
 ```php
 [
-    'enabled' => true, // Do you want to capture queries?
-    'token' => env('QUERY_WATCH_TOKEN', 'change_me'), // Token used for Authenticating Private Broadcast Channel
+    // Do you want to capture queries?
+    'enabled' => env('QUERY_WATCH_ENABLED', true), 
+    
+    // Token used for Authenticating Private Broadcast Channel
+    'token' => env('QUERY_WATCH_TOKEN', 'change_me'), 
     'scope' => [
         'time_exceeds_ms' => [
-            'enabled' => true, // Do you want to capture everything or only slow queries?
-            'threshold' => 500, // The number of milliseconds it took to execute the query.
+            // Do you want to capture everything or only slow queries?
+            'enabled' => env('QUERY_WATCH_SCOPE_TIME_ENABLED', true), 
+            
+            // The number of milliseconds it took to execute the query.
+            'threshold' => env('QUERY_WATCH_SCOPE_TIME_THRESHOLD', 500), 
         ],
         'context' => [
             'auth_user' => [
-                'enabled' => true, // Do you want to know context of the authenticated user when query is captured?
-                'ttl' => 300, // How long do you want the session_id/authenticated user cached for? 
-                              // without this cache, your application will infinite loop because it will capture
-                              // the user query and loop.
-                              // See closed Issue #1 for context.
+                // Do you want to know context of the authenticated user when query is captured?
+                'enabled' => env('QUERY_WATCH_SCOPE_CONTEXT_AUTH_ENABLED', true),
+                 
+                // How long do you want the session_id/authenticated user cached for? 
+                // without this cache, your application will infinite loop because it will capture
+                // the user query and loop.
+                // See closed Issue #1 for context.
+                'ttl' => env('QUERY_WATCH_SCOPE_CONTEXT_AUTH_TTL', 300), 
             ],
             'trigger' => [
-                'enabled' => true, // Do you want to know what triggered the query?
-                                   // i.e Console command or Request
+                // Do you want to know what triggered the query?
+                // i.e Console command or Request
+                'enabled' => env('QUERY_WATCH_SCOPE_TRIGGER_ENABLED', true), 
             ],
         ],
         'ignorable_tables' => [
-            'jobs' // Do you want to capture queries on specific tables?
-                   // If you are utilizing the database queue driver, you need to
-                   // ignore the jobs table or you'll get infinite capture loops.
+            // Do you want to capture queries on specific tables?
+            // If you are utilizing the database queue driver, you need to
+            // ignore the jobs table, or you'll potentially get infinite capture loops.
+            'jobs' 
         ],
         'ignorable_statements' => [
-            'create' // Do you want to ignore specific SQL statements?
+            // Do you want to ignore specific SQL statements?
+            'create' 
         ]
     ],
-    'listener' => [ // Channel notifications are queued
-        'connection' => 'sync', // Define what connection to use.
-        'queue' => 'default', //  Define what queue to use
-        'delay' => null, // Do you want to delay the notifications at all?
+    'listener' => [ 
+        // Channel notifications are queued
+        // Define what connection to use.
+        'connection' => 'sync',
+        
+        //  Define what queue to use 
+        'queue' => 'default',
+        
+        // Do you want to delay the notifications at all? 
+        'delay' => null, 
     ],
     'channels' => [ // Where to send notifications?
         'discord' => [ 
-            'enabled' => false, // Do you want discord webhook notifications?
+            // Do you want discord webhook notifications?
+            'enabled' => env('QUERY_WATCH_CHANNEL_DISCORD_ENABLED', false),
+            
+            // Discord Web-hook URL 
             'hook' => env('DISCORD_HOOK', 'please_fill_me_in'), 
         ],
         'slack' => [ 
-            'enabled' => false, // Do you want Slack webhook notifications?
+            // Do you want Slack webhook notifications?
+            'enabled' => env('QUERY_WATCH_CHANNEL_SLACK_ENABLED', false),
+            
+            // Slack Web-hook URL
             'hook' => env('SLACK_HOOK', 'please_fill_me_in'), 
         ],
     ]
@@ -143,6 +167,7 @@ Once you have done this, you can enable Discord Notifications in the configurati
 
 - [Notification Channels Wiki](https://github.com/YorCreative/Laravel-Query-Watcher/wiki/Notification-Channels)
 - [Screenshots](https://github.com/YorCreative/Laravel-Query-Watcher/wiki/Screenshots)
+
 ## Testing
 
 ```bash
