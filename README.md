@@ -77,7 +77,8 @@ Adjust the configuration file to suite your application.
             // Do you want to capture queries on specific tables?
             // If you are utilizing the database queue driver, you need to
             // ignore the jobs table, or you'll potentially get infinite capture loops.
-            'jobs' 
+            'jobs',
+            'failed_jobs'
         ],
         'ignorable_statements' => [
             // Do you want to ignore specific SQL statements?
