@@ -1,20 +1,20 @@
 <?php
 
 return [
-    'enabled' => true,
+    'enabled' => env('QUERY_WATCH_ENABLED', true),
     'token' => env('QUERY_WATCH_TOKEN', 'change_me'),
     'scope' => [
         'time_exceeds_ms' => [
-            'enabled' => false,
-            'threshold' => 2,
+            'enabled' => env('QUERY_WATCH_SCOPE_TIME_ENABLED', false),
+            'threshold' => env('QUERY_WATCH_SCOPE_TIME_THRESHOLD', 500),
         ],
         'context' => [
             'auth_user' => [
-                'enabled' => true,
-                'ttl' => 300,
+                'enabled' => env('QUERY_WATCH_SCOPE_CONTEXT_AUTH_ENABLED', true),
+                'ttl' => env('QUERY_WATCH_SCOPE_CONTEXT_AUTH_TTL', 300),
             ],
             'trigger' => [
-                'enabled' => true,
+                'enabled' => env('QUERY_WATCH_SCOPE_TRIGGER_ENABLED', true),
             ],
         ],
         'ignorable_tables' => [
@@ -31,11 +31,11 @@ return [
     ],
     'channels' => [
         'discord' => [
-            'enabled' => false,
+            'enabled' => env('QUERY_WATCH_CHANNEL_DISCORD_ENABLED', false),
             'hook' => env('DISCORD_HOOK', 'placeholder'),
         ],
         'slack' => [
-            'enabled' => false,
+            'enabled' => env('QUERY_WATCH_CHANNEL_SLACK_ENABLED', false),
             'hook' => env('SLACK_HOOK', 'placeholder'),
         ],
     ],

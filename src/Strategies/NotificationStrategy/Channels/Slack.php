@@ -13,7 +13,9 @@ class Slack implements NotificationChannelInterface
      */
     public function isEnabled(): bool
     {
-        return config('querywatcher.channels.slack.enabled');
+        return is_bool(config('querywatcher.channels.slack.enabled'))
+            ? config('querywatcher.channels.slack.enabled')
+            : false;
     }
 
     /**
