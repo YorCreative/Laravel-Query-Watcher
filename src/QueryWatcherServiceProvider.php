@@ -2,7 +2,6 @@
 
 namespace YorCreative\QueryWatcher;
 
-use Illuminate\Support\Facades\Broadcast;
 use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Event;
 use Illuminate\Support\ServiceProvider;
@@ -20,12 +19,12 @@ class QueryWatcherServiceProvider extends ServiceProvider
 
     public function register()
     {
-        $this->mergeConfigFrom(dirname(__DIR__, 1) . '/config/querywatcher.php', 'querywatcher');
+        $this->mergeConfigFrom(dirname(__DIR__, 1).'/config/querywatcher.php', 'querywatcher');
 
-        $this->loadRoutesFrom(dirname(__DIR__, 1) . '/routes/BroadcastAuthRoute.php');
+        $this->loadRoutesFrom(dirname(__DIR__, 1).'/routes/BroadcastAuthRoute.php');
 
         $this->publishes([
-            dirname(__DIR__, 1) . '/config' => base_path('config'),
+            dirname(__DIR__, 1).'/config' => base_path('config'),
         ]);
 
         QueryWatcher::listen();
@@ -53,7 +52,7 @@ class QueryWatcherServiceProvider extends ServiceProvider
 
     public function boot()
     {
-        require dirname(__DIR__, 1) . '/routes/QueryChannel.php';
+        require dirname(__DIR__, 1).'/routes/QueryChannel.php';
 
         $this->app->singleton(Pusher::class, function () {
             return new Pusher(

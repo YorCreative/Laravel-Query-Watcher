@@ -2,19 +2,19 @@
 
 namespace YorCreative\QueryWatcher\Services;
 
-use Pusher\Pusher;
-use Pusher\PusherException;
-use Illuminate\Http\Request;
-use Illuminate\Http\Response;
-use Illuminate\Support\Facades\Config;
 use Illuminate\Contracts\Foundation\Application;
 use Illuminate\Contracts\Routing\ResponseFactory;
+use Illuminate\Http\Request;
+use Illuminate\Http\Response;
+use Pusher\Pusher;
+use Pusher\PusherException;
 
 class BroadcastAuthService
 {
     /**
-     * @param Request $request
+     * @param  Request  $request
      * @return Response|Application|ResponseFactory
+     *
      * @throws PusherException
      */
     public static function pusher(Request $request): Response|Application|ResponseFactory
