@@ -19,6 +19,7 @@ return [
         ],
         'ignorable_tables' => [
             'jobs',
+            'failed_jobs',
         ],
         'ignorable_statements' => [
             'create',
